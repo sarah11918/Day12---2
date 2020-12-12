@@ -8,6 +8,7 @@ async function getAllData() {
 
 function separateLines(data) {
   return data.split("\n")
+  console.log(data)
 }
 
 function parseCommands(data) {
@@ -15,6 +16,7 @@ function parseCommands(data) {
   data.forEach(data => {
     parsedCommands.push([data.charAt(0), parseInt(data.slice(1))])
   })
+  console.log(parsedCommands)
   return parsedCommands
 }
 
@@ -118,9 +120,10 @@ function turnRight(currentPosition,commands) {
 }
  
 
-function makeAMove(currentPosition,commands){
+function makeFirstMove(currentPosition,commands){
   let nextCommands = commands.slice(1)
   let wayport = [10,1]
+  console.log(wayport)
  
   
   if (commands[0][0] === "N") {
@@ -169,6 +172,7 @@ function makeAMove(currentPosition,commands){
       wayport = [wayport[1]*(-1), wayport[0]]
     }
   }
+  
   return { currentPosition, nextCommands, wayport }
 }
 
@@ -251,12 +255,11 @@ function makeAllTheMoves(newState) {
    
 }
 
-
 getAllData()
 .then(separateLines)
 .then(parseCommands)
-.then(commands => makeAMove([0,0,"E"],commands))
-//.then(makeAllTheMoves)
+.then(commands => makeFirstMove([0,0,"E"],commands))
+.then(makeAllTheMoves)
 .then(result => console.log(result)) 
 
 
