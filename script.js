@@ -1,4 +1,4 @@
-let dataFile = 'day12-tiny.txt' //-example (answer:25) east 17, south 8
+let dataFile = 'day12.txt' //-example (answer:25) east 17, south 8
 
 async function getAllData() {
   let response = await fetch(dataFile)
@@ -42,8 +42,9 @@ function makeFirstMove(currentPosition,commands){
   } else
  
   if (commands[0][0] === "F") {
-      
-      console.log("nope")
+    currentPosition = [
+      currentPosition[0] + (wayport[0] * commands[0][1]),currentPosition[1] + (wayport[1] * commands[0][1]),
+    ]
   
   } else
 
@@ -103,10 +104,11 @@ function makeAnotherMove(newState) {
   } else
  
   if (newCommands[0][0] === "F") {
-      
-      console.log("nope")
+    newPosition = [
+      newPosition[0] + (newWayport[0] * newCommands[0][1]),
+      newPosition[1] + (newWayport[1] * newCommands[0][1])
+      ]
   
-
   } else 
   
    if (newCommands[0][0] === "L") {
