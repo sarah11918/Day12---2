@@ -8,7 +8,7 @@ async function getAllData() {
 
 function separateLines(data) {
   return data.split("\n")
-  console.log(data)
+
 }
 
 function parseCommands(data) {
@@ -16,116 +16,15 @@ function parseCommands(data) {
   data.forEach(data => {
     parsedCommands.push([data.charAt(0), parseInt(data.slice(1))])
   })
-  console.log(parsedCommands)
   return parsedCommands
 }
 
 // HERE, I HAVE MY ARRAY OF COMMAND ARRAYS
-function turnLeft(currentPosition,commands) {
-    
-    if (commands[0][1] === 90) {
-      if (currentPosition[2] === "E") {
-        currentPosition = [currentPosition[0],currentPosition[1],"N"]
-      } else
-      if (currentPosition[2] === "W") {
-        currentPosition = [currentPosition[0],currentPosition[1],"S"]
-      } else
-      if (currentPosition[2] === "N") {
-        currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      } else
-      if (currentPosition[2] === "S") {
-         currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      } 
-    
-    } else
-    if (commands[0][1] === 180) {
-      if (currentPosition[2] === "E") {
-       currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      } else
-      if (currentPosition[2] === "W") {
-         currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      } else
-      if (currentPosition[2] === "N") {
-        currentPosition = [currentPosition[0],currentPosition[1],"S"]
-      } else
-      if (currentPosition[2] === "S") {
-         currentPosition = [currentPosition[0],currentPosition[1],"N"]
-      }
-    
-    } else
-    if (commands[0][1] === 270) {
-      if (currentPosition[2] === "E") {
-        currentPosition = [currentPosition[0],currentPosition[1],"S"] 
-      } else
-      if (currentPosition[2] === "W") {
-       currentPosition = [currentPosition[0],currentPosition[1],"N"]
-      } else
-      if (currentPosition[2] === "N") {
-          currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      } else
-      if (currentPosition[2] === "S") {
-        currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      }
-    }
-    return currentPosition
-  }
-
-
-function turnRight(currentPosition,commands) {
-    if (commands[0][1] === 90) {
-
-      if (currentPosition[2] === "E") {
-          currentPosition = [currentPosition[0],currentPosition[1],"S"]
-      } else
-      if (currentPosition[2] === "W") {
-          currentPosition = [currentPosition[0],currentPosition[1],"N"]
-      } else
-      if (currentPosition[2] === "N") {
-         currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      } else
-      if (currentPosition[2] === "S") {
-          currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      }
-    } else
-    if (commands[0][1] === 180) {
-      if (currentPosition[2] === "E") {
-          currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      } else
-      if (currentPosition[2] === "W") {
-         currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      } else
-      if (currentPosition[2] === "N") {
-          currentPosition = [currentPosition[0],currentPosition[1],"S"]
-      } else
-      if (currentPosition[2] === "S") {
-          currentPosition = [currentPosition[0],currentPosition[1],"N"]
-      }
-    } else
-    if (commands[0][1] === 270) {
-      if (currentPosition[2] === "E") {
-         currentPosition = [currentPosition[0],currentPosition[1],"N"] 
-      } else
-      if (currentPosition[2] === "W") {
-          currentPosition = [currentPosition[0],currentPosition[1],"S"]
-      } else
-        if (currentPosition[2] === "N") {
-          currentPosition = [currentPosition[0],currentPosition[1],"W"]
-      } else
-      if (currentPosition[2] === "S") {
-          currentPosition = [currentPosition[0],currentPosition[1],"E"]
-      }
-    } 
-
-    return currentPosition
-}
  
-
 function makeFirstMove(currentPosition,commands){
   let nextCommands = commands.slice(1)
   let wayport = [10,1]
-  console.log(wayport)
- 
-  
+
   if (commands[0][0] === "N") {
     wayport = [wayport[0],wayport[1] + commands[0][1]]
   } else
@@ -186,19 +85,20 @@ function makeAnotherMove(newState) {
   let newCommands = [...newState.nextCommands] 
   let newWayport = [...newState.wayport]
 
-    if (commands[0][0] === "N") {
+
+  if (newCommands[0][0] === "N") {
     newWayport = [newWayport[0],newWayport[1] + newCommands[0][1]]
   } else
 
-  if (commands[0][0] === "S") {
+  if (newCommands[0][0] === "S") {
       newWayport = [newWayport[0], newWayport[1] - newCommands[0][1]]
   }  else
 
-  if (commands[0][0] === "E") {
+  if (newCommands[0][0] === "E") {
     newWayport = [newWayport[0] + newCommands[0][1],newWayport[1]]
   } else
 
-  if (commands[0][0] === "W") {
+  if (newCommands[0][0] === "W") {
       newWayport = [newWayport[0] - newCommands[0][1], newWayport[1]]
   } else
  
